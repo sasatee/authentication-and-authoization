@@ -1,0 +1,191 @@
+<!-- <div class="h-screen flex items-center justify-center">
+   <div class="py-4 rounded-lg shadow-lg px-12">
+      <div class="relative flex flex-col rounded-xl bg-transparent">
+         <h4 class="block text-xl font-medium text-slate-800">Sign Up</h4>
+         <p class="text-slate-500 font-light">Create your account.</p>
+         <form class="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="mb-1 flex flex-col gap-6">
+               <div class="w-full max-w-sm min-w-[200px]">
+                  <label class="block mb-2 text-sm text-slate-600">
+                     Your Name
+                  </label>
+                  <input
+                     type="text"
+                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                     placeholder="Your Name"
+                     formControlName="name"
+                  />
+               </div>
+               <div class="w-full max-w-sm min-w-[200px]">
+                  <label class="block mb-2 text-sm text-slate-600">
+                     Email
+                  </label>
+                  <input
+                     type="email"
+                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                     placeholder="Your Email"
+                     formControlName="email"
+                  />
+               </div>
+               <div class="w-full max-w-sm min-w-[200px]">
+                  <label class="block mb-2 text-sm text-slate-600">
+                     Password
+                  </label>
+                  <input
+                     type="password"
+                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                     placeholder="Your Password"
+                     formControlName="password"
+                  />
+               </div>
+            </div>
+            <div class="inline-flex items-center mt-2">
+               <label
+                  class="flex items-center cursor-pointer relative"
+                  for="check-2"
+               >
+                  <input
+                     type="checkbox"
+                     class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
+                     id="check-2"
+                  />
+                  <span
+                     class="absolute text-white opacity-0 pointer-events-none peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  >
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-3.5 w-3.5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="1"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                           clip-rule="evenodd"
+                        ></path>
+                     </svg>
+                  </span>
+               </label>
+               <label
+                  class="cursor-pointer ml-2 text-slate-600 text-sm"
+                  for="check-2"
+               >
+                  Remember Me
+               </label>
+            </div>
+            <button
+               class="mt-4 w-full rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+               type="submit"
+            >
+               Sign Up
+            </button>
+            <p class="flex justify-center mt-6 text-sm text-slate-600">
+               Don&apos;t have an account?
+               <a
+                  routerLink="/login"
+                  class="ml-1 text-sm font-semibold text-slate-700 underline"
+               >
+                  Sign up
+               </a>
+            </p>
+         </form>
+      </div>
+   </div>
+</div> -->
+
+<div class="h-screen flex items-center justify-center">
+   <form
+      class="shadow-md rounded-md p-5 bg-white w-1/2"
+      (ngSubmit)="register()"
+      [formGroup]="registerForm"
+   >
+   @for(error of errors; track error){
+    <div class="bg-red-100 border mb-2 flex flex-col gap-2 border-red-400 text-red-400 px-4 rounded-md relative">
+      <div class="text-xs p-2">{{error.description}}</div>
+    </div>
+
+   }
+
+      <div class="py-4">
+         <h1 class="font-bold py-2">Register</h1>
+         <h6 class="text-slate-600 text-base">Register your account</h6>
+      </div>
+
+      <mat-form-field apperance="fill" class="w-full">
+         <mat-label>Email</mat-label>
+         <input matInput placeholder="Email" formControlName="email" />
+         <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field apperance="fill" class="w-full">
+         <mat-label>Full Name</mat-label>
+         <input matInput placeholder="Full Name" formControlName="fullName" />
+         <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+         <mat-label> Roles </mat-label>
+         <mat-select multiple formControlName="roles">
+            @for (item of roles$ | async; track item) {
+            <mat-option [value]="item.name"> {{ item.name }} </mat-option>
+            }
+         </mat-select>
+      </mat-form-field>
+
+      <mat-form-field apperance="fill" class="w-full">
+         <mat-label>Password</mat-label>
+         <input
+            matInput
+            placeholder="password"
+            type="{{ passwordHide ? 'password' : 'text' }}"
+            formControlName="password"
+         />
+         <mat-icon matPrefix>lock</mat-icon>
+         <mat-icon (click)="passwordHide = !passwordHide" matSuffix>{{
+            passwordHide ? "visibility_off" : "visibility"
+         }}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field apperance="fill" class="w-full">
+         <mat-label>Confirm Password</mat-label>
+         <input
+            matInput
+            placeholder="password"
+            type="{{ confirmPasswordHide ? 'password' : 'text' }}"
+            formControlName="confirmPassword"
+         />
+         <mat-icon matPrefix>lock</mat-icon>
+         <mat-icon
+            (click)="confirmPasswordHide = !confirmPasswordHide"
+            matSuffix
+            >{{
+               confirmPasswordHide ? "visibility_off" : "visibility"
+            }}</mat-icon
+         >
+      </mat-form-field>
+      <span
+      class="text-red-600"
+         *ngIf="
+            registerForm.hasError('passwordMismatch') &&
+            registerForm.get('confirmPassword') &&
+            registerForm.get('confirmPassword')?.dirty &&
+            registerForm.get('confirmPassword')?.touched
+         "
+      >
+         Password do not match.
+      </span>
+      <button
+         class="w-full border-collapse border-slate-700 disabled:bg-purple-950 py-2 px-3 bg-purple-700 text-white rounded-md"
+         type="submit"
+      >
+         Register
+      </button>
+      <div class="my-5 items-center">
+         <span class="text-slate-600">Don't have an account?</span>
+         <a class="blue-purple-700 underline px-1" [routerLink]="['/login']"
+            >Login</a
+         >
+      </div>
+   </form>
+</div>
